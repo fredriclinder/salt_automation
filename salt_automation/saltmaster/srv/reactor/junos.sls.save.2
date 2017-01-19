@@ -1,0 +1,22 @@
+miniondirectory:
+  local.file.mkdir:
+    - tgt: '{{ data['id'] }}'
+    - arg:
+      - /srv/junos_configs/{{ data['id'] }}
+
+retrive_junos_config:
+  local.junos.rpc:
+    - tgt: {{ data['data']['hostname'] }}
+    - arg:
+      - "get_config"
+      - /srv/junos_configs/{{ data['id'] }}/{{ data['data']['hostname'] }}.conf
+      - format='text'
+
+clean_up_config:
+  local.cmd.run:
+    - tgt: {{ data['id'] }}
+    - arg:
+      - sed -i '1d' /srv/junos_configs/{{ data['id'] }}/{{ data['data']['hostname'] }}.conf
+remove_config_change_date:
+  local.cmd.run:
+    - tgt: 'minioncontro

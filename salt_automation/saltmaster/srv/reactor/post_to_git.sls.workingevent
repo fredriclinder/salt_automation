@@ -1,0 +1,13 @@
+check_event:
+    {% if data['fun_args'].1 == 'junos.conf created on proxy vqfx' %}
+
+      local.cmd.run:
+        - tgt: 'minioncontroller1'
+        - arg:
+          - (sed -i '/Last changed:/d' /srv/junos_configs/minioncontroller1/vqfx.conf && cd /srv/junos_configs && rm -f .git/index.lock && git add * && git commit -a -m "commited by salstack minion" && git push http://saltstack:juniper123@gitlab/saltstack/junos-config-repository.git --all)
+
+
+
+    {% endif %}
+
+

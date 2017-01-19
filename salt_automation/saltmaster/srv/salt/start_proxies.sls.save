@@ -1,0 +1,5 @@
+start_proxies_on_minions:
+  state.sls:
+    - tgt: ‘minion'
+    - arg:
+      - “proxy_states”salt-proxy-configure:

@@ -1,0 +1,6 @@
+check_event:
+  {% if data['fun'] == 'file.mkdir' %}
+    local.event.fire:
+      - tgt: '{{ data['id'] }}'
+      - arg:
+        - { info: "proxymapper", id: "{{ data['id'] }}

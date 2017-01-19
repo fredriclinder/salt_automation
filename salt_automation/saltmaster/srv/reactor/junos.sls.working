@@ -1,0 +1,23 @@
+miniondirectory:
+  local.file.mkdir:
+    - tgt: '{{ data['id'] }}'
+    - arg:
+      - /srv/junos_configs/{{ data['id'] }}
+
+write_config:
+  local.junos.rpc:
+    - tgt: {{ data['data']['hostname'] }}
+    - arg:
+      - "get_config"
+      - /srv/junos_configs/{{ data['id'] }}/{{ data['data']['hostname'] }}.conf
+      - format='text'
+    - require:
+      - salt: miniondirectory
+
+cleanup_config:
+  local.cmd.run:
+    - tgt: 'minioncontroller1'
+    - arg:
+      - sed -i '/Last changed/d' /srv/junos_configs/minioncontroller1/vqfx.conf
+    - require:
+      - salt: write_config

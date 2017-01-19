@@ -1,0 +1,9 @@
+check_event:
+  {% if data['fun_args'].0 == 'get_config' %}
+    local.event.fire:
+      - tgt: 'minioncontroller1'
+      - arg:
+        - { info: "proxymapper", id: "minioncontroller1", proxy:proxy "{{ data['id'] }}" }
+        - junos.conf created on proxy {{ data['id'] }}
+
+  {% endif %}

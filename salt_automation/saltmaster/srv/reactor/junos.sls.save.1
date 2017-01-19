@@ -1,0 +1,13 @@
+retrive_junos_config:
+  local.junos.rpc:
+    - tgt: {{ data['data']['hostname'] }}
+    - arg:
+      - "get_config"
+      - /srv/junos_configs/{{ data['data']['hostname'] }}.conf
+      - format='text'
+
+test:
+  event:
+    - send
+    - data
+      

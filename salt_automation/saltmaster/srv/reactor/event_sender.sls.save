@@ -1,0 +1,12 @@
+send_event:
+  event.fire:
+    - tgt: 'minioncontroller1'
+    - arg:
+      - "testing"
+
+
+send_event:
+  event.fire:
+    - tgt: 'minioncontroller1'
+    - arg:
+      - "testing"

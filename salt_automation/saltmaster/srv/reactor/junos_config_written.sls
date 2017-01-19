@@ -1,0 +1,7 @@
+check_evenhhhhhhht:
+  {% if data['id'] == 'vqfx' %}
+    local.event.fire:
+      - arg:
+        - { info: "blablabla" }
+          - testingtesting
+

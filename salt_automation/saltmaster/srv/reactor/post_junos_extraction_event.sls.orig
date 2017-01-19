@@ -1,0 +1,9 @@
+check_event:
+  {% if data['fun_args'].0 == 'get_config' %}
+    local.event.fire:
+      - tgt: '{{ data['id'] }}'
+      - arg:
+        - { info: "proxymapper", id: "{{ data['id'] }}", proxy: "{{ data['data']['hostname'] }}" }
+        - junos.conf created on proxy {{ data['id'] }}
+
+  {% endif %}
